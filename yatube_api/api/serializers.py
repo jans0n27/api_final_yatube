@@ -9,10 +9,6 @@ User = get_user_model()
 
 
 class PostSerializer(serializers.ModelSerializer):
-    group = serializers.PrimaryKeyRelatedField(
-        required=False,
-        queryset=Group.objects.all()
-    )
     author = SlugRelatedField(slug_field='username', read_only=True)
 
     class Meta:

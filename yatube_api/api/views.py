@@ -56,7 +56,8 @@ class FollowViewSet(ListCreateViewSet):
     search_fields = ('following__username', 'user__username')
 
     def get_queryset(self):
-        new_queryset = Follow.objects.filter(user=self.request.user)
+        new_queryset = Follow.objects.select_related(
+            'user', 'following').filter(user=self.request.user)
         return new_queryset
 
     def perform_create(self, serializer):
